@@ -1,5 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { BASE_URL, USERS_URL, CATEGORY_URL } from "../constants";
+import {
+  BASE_URL,
+  USERS_URL,
+  CATEGORY_URL,
+  PRODUCT_URL,
+  UPLOAD_URL,
+} from "../constants";
 
 const baseQuery = fetchBaseQuery({ baseUrl: BASE_URL });
 
@@ -73,7 +79,6 @@ export const apiSlice = createApi({
         body: data,
       }),
     }),
-
     updateCategory: builder.mutation({
       query: ({ categoryId, updateCategory }) => ({
         url: `${CATEGORY_URL}/${categoryId}`,
@@ -81,18 +86,91 @@ export const apiSlice = createApi({
         body: updateCategory,
       }),
     }),
-
     deleteCategory: builder.mutation({
       query: (categoryId) => ({
         url: `${CATEGORY_URL}/${categoryId}`,
         method: "DELETE",
       }),
     }),
-
     getAllCategories: builder.query({
       query: () => ({
         url: `${CATEGORY_URL}/categories`,
       }),
+    }),
+
+    // Product
+    getProducts: builder.query({
+      query: ({ keyword }) => ({
+        url: `${PRODUCT_URL}`,
+        params: { keyword },
+      }),
+      providesTags: ["Product"],
+      keepUnusedDataFor: 5,
+    }),
+    getProductById: builder.query({
+      query: (id) => ({
+        url: `${PRODUCT_URL}/${id}`,
+      }),
+      providesTags: (res, err, id) => [{ type: "Product", id }],
+    }),
+    allProducts: builder.query({
+      query: () => ({
+        url: `${PRODUCT_URL}/allproducts`,
+      }),
+    }),
+    getProductDetails: builder.query({
+      query: (id) => ({
+        url: `${PRODUCT_URL}/${id}`,
+      }),
+      keepUnusedDataFor: 5,
+    }),
+    createProduct: builder.mutation({
+      query: (data) => ({
+        url: `${PRODUCT_URL}`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Product"],
+    }),
+    updateProduct: builder.mutation({
+      query: ({ productId, productData }) => ({
+        url: `${PRODUCT_URL}/${productId}`,
+        method: "PUT",
+        body: productData,
+      }),
+    }),
+    uploadProductImage: builder.mutation({
+      query: (data) => ({
+        url: `${UPLOAD_URL}`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+    deleteProduct: builder.mutation({
+      query: (productId) => ({
+        url: `${PRODUCT_URL}/${productId}`,
+        method: "DELETE",
+      }),
+      providesTags: ["Product"],
+    }),
+    createReview: builder.mutation({
+      query: (data) => ({
+        url: `${PRODUCT_URL}/${data.productId}/review`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+    getTopProducts: builder.query({
+      query: () => ({
+        url: `${PRODUCT_URL}/topproducts`,
+      }),
+      keepUnusedDataFor: 5,
+    }),
+    getNewProducts: builder.query({
+      query: () => ({
+        url: `${PRODUCT_URL}/newproducts`,
+      }),
+      keepUnusedDataFor: 5,
     }),
   }),
 });
@@ -110,4 +188,15 @@ export const {
   useUpdateCategoryMutation,
   useDeleteCategoryMutation,
   useGetAllCategoriesQuery,
+  useGetProductsQuery,
+  useGetProductByIdQuery,
+  useAllProductsQuery,
+  useGetProductDetailsQuery,
+  useCreateProductMutation,
+  useUpdateProductMutation,
+  useUploadProductImageMutation,
+  useDeleteProductMutation,
+  useCreateReviewMutation,
+  useGetTopProductsQuery,
+  useGetNewProductsQuery,
 } = apiSlice;

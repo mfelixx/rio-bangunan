@@ -6,6 +6,7 @@ import {
   useDeleteUserMutation,
   useUpdateUserMutation,
 } from "../../redux/api/apiSlice";
+import AdminMenu from "./AdminMenu";
 
 const UserList = () => {
   const { data: users, refetch, isLoading, error } = useGetUsersQuery();
@@ -61,6 +62,7 @@ const UserList = () => {
 
   return (
     <div className="p-4">
+      <AdminMenu />
       <h1 className="text-2xl font-semibold mb-4">Users</h1>
       {isLoading ? (
         <div className="loader"></div>

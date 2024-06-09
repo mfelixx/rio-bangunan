@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import {
@@ -8,6 +9,7 @@ import {
 } from "../../redux/api/apiSlice";
 import CategoryForm from "../../components/CategoryForm";
 import { Modal } from "../../components/Modal";
+import AdminMenu from "./AdminMenu";
 
 const CategoryList = () => {
   const { data: categories, refetch } = useGetAllCategoriesQuery();
@@ -88,7 +90,7 @@ const CategoryList = () => {
 
   return (
     <div className="ml-[10rem] flex flex-col md:flex-row">
-      {/* Admin menu */}
+      <AdminMenu />
       <div className="md:w-3/4 p-3">
         <div className="h-12">Manage Categories</div>
         <CategoryForm
@@ -113,7 +115,7 @@ const CategoryList = () => {
                   }
                 }}
               >
-                {category.name}
+                {_.capitalize(category.name)}
               </button>
             </div>
           ))}
