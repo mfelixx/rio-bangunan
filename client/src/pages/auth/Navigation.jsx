@@ -16,6 +16,7 @@ import { logout } from "../../redux/features/auth/authSlice";
 
 const Navigation = () => {
   const { userInfo } = useSelector((state) => state.auth);
+  const { cartItems } = useSelector((state) => state.cart);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
 
@@ -71,12 +72,20 @@ const Navigation = () => {
           <span className="hidden nav-item-name mt-[3rem]">Shop</span>{" "}
         </Link>
 
-        <Link
-          to="/cart"
-          className="flex items-center transition-transform transform hover:translate-x-2"
-        >
-          <AiOutlineShoppingCart className="mr-2 mt-[3rem]" size={26} />
-          <span className="hidden nav-item-name mt-[3rem]">Cart</span>{" "}
+        <Link to="/cart" className="flex relative">
+          <div className="flex items-center transition-transform transform hover:translate-x-2">
+            <AiOutlineShoppingCart className="mr-2 mt-[3rem]" size={26} />
+            <span className="hidden nav-item-name mt-[3rem]">Cart</span>{" "}
+            <div className="absolute top-9">
+              {cartItems.length > 0 && (
+                <span>
+                  <span className="bg-red-500 text-white text-xs px-1 py-0 rounded-full">
+                    {cartItems.reduce((acc, item) => acc + item.qty, 0)}
+                  </span>
+                </span>
+              )}
+            </div>
+          </div>
         </Link>
       </div>
 

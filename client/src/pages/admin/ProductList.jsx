@@ -106,6 +106,7 @@ const ProductList = () => {
                 <input
                   type="text"
                   className="p-4 mb-3 w-[27rem] border rounded-lg"
+                  maxLength="12"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
@@ -153,6 +154,7 @@ const ProductList = () => {
             <textarea
               type="text"
               className="p-2 mb-3 border rounded-lg w-[95%]"
+              maxLength="300"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             ></textarea>

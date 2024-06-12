@@ -31,7 +31,7 @@ const AllProducts = () => {
   }
   return (
     <div className="2xl:container mx-[9rem]">
-      <div className="flex flx-col md:flex-row">
+      <div className="flex flx-col md:flex-row ">
         <div className="p-3">
           <div className="ml-[2rem] text-xl font-semibold h-12">
             All Products ({products.length})
@@ -64,7 +64,7 @@ const AllProducts = () => {
                       </p>
                     </div>
 
-                    <p className="text-gray-400 xl:w-[30rem] md:w-[20rem] sm:w-[10rem] text-sm mb-4">
+                    <p className="text-gray-400 xl:w-[25rem] md:w-[15rem] sm:w-[5rem] text-sm mb-4">
                       {product?.description?.substring(0, 160)}...
                     </p>
 

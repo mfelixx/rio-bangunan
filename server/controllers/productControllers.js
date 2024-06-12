@@ -117,7 +117,9 @@ export const getProducts = asyncHandler(async (req, res) => {
     res
       .status(200)
       .json({ products, page: Math.ceil(count / pageSize), hasMore: false });
-  } catch (error) {}
+  } catch (error) {
+    res.status(400).json({ error: "Failed to get products" });
+  }
 });
 
 export const getProductById = asyncHandler(async (req, res) => {
@@ -154,6 +156,7 @@ export const addProductReview = asyncHandler(async (req, res) => {
 
       if (alreadyReviewed) {
         res.status(400).json({ error: "Product already reviewed" });
+        return;
       }
 
       const review = {
@@ -193,5 +196,19 @@ export const getNewProducts = asyncHandler(async (req, res) => {
     res.status(200).json(products);
   } catch (error) {
     res.status(400).json({ error: "Failed to get new products" });
+  }
+});
+
+export const filterProducts = asyncHandler(async (req, res) => {
+  try {
+    const { checked, radio } = req.body;
+    let args = {};
+    if (checked.length > 0) args.category = checked;
+    if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] };
+
+    const products = await Product.find(args);
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(400).json({ error: "Failed to filter products" });
   }
 });

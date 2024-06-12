@@ -6,6 +6,7 @@ import {
   addProduct,
   addProductReview,
   deleteProduct,
+  filterProducts,
   getAllProduct,
   getNewProducts,
   getProductById,
@@ -20,13 +21,7 @@ router
   .get(getProducts)
   .post(authentication, authorizeAdmin, formidable(), addProduct);
 router.get("/allproducts", getAllProduct);
-router.post(
-  "/:id/reviews",
-  authentication,
-  authorizeAdmin,
-  checkId,
-  addProductReview
-);
+router.post("/:id/reviews", authentication, checkId, addProductReview);
 router.get("/topproducts", getTopProducts);
 router.get("/newproducts", getNewProducts);
 router
@@ -34,4 +29,5 @@ router
   .get(getProductById)
   .put(authentication, authorizeAdmin, formidable(), updateDetailsProduct)
   .delete(authentication, authorizeAdmin, deleteProduct);
+router.route("/filtered-products").post(filterProducts);
 export default router;

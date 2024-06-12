@@ -155,7 +155,7 @@ export const apiSlice = createApi({
     }),
     createReview: builder.mutation({
       query: (data) => ({
-        url: `${PRODUCT_URL}/${data.productId}/review`,
+        url: `${PRODUCT_URL}/${data.id}/reviews`,
         method: "POST",
         body: data,
       }),
@@ -171,6 +171,13 @@ export const apiSlice = createApi({
         url: `${PRODUCT_URL}/newproducts`,
       }),
       keepUnusedDataFor: 5,
+    }),
+    getFilteredProducts: builder.query({
+      query: ({ checked, radio }) => ({
+        url: `${PRODUCT_URL}/filtered-products`,
+        method: "POST",
+        body: { checked, radio },
+      }),
     }),
   }),
 });
@@ -199,4 +206,5 @@ export const {
   useCreateReviewMutation,
   useGetTopProductsQuery,
   useGetNewProductsQuery,
+  useGetFilteredProductsQuery,
 } = apiSlice;

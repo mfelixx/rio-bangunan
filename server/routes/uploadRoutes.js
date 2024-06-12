@@ -1,7 +1,8 @@
 import express from "express";
 import path from "path";
 import multer from "multer";
-import { error } from "console";
+import sharp from "sharp";
+import fs from "fs";
 
 const router = express.Router();
 
@@ -44,13 +45,22 @@ const upload = multer({
 const UploadSingle = upload.single("image");
 
 router.post("/", (req, res) => {
-  UploadSingle(req, res, (err) => {
+  UploadSingle(req, res, async (err) => {
     if (err) {
       res.status(500).send({ error: err.message });
     } else if (req.file) {
+      const filepath = req.file.path;
+      const fileExt = path.extname(req.file.originalname).toLowerCase();
+      const resizedFilePath = `uploads/resized-${Date.now()}${fileExt}`;
+
+      const resizedImageBuffer = await sharp(filepath)
+        .resize(6000, 4000)
+        .toBuffer();
+      fs.writeFileSync(resizedFilePath, resizedImageBuffer);
+
       res.status(200).send({
         msg: "File uploaded successfully",
-        img: `/${req.file.path}`,
+        img: `/${resizedFilePath}`,
       });
     } else {
       res.status(400).send({ error: "File not uploaded" });
