@@ -7,7 +7,6 @@
   "scripts": {
     "client": "npm run dev --prefix public",
     "server": "nodemon server/index.js",
-    "dev": "concurrently \"npm run client\" \"npm run server\" ",
     "build": "npm instal && npm install --prefix public && npm run build --prefix public"
   },
   "keywords": [],

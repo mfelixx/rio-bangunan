@@ -7,7 +7,8 @@
     },
     {
       "src": "public/**/*",
-      "use": "@vercel/static"
+      "use": "@vercel/static-vite",
+      "config": { "dev": false }
     }
   ],
   "routes": [
