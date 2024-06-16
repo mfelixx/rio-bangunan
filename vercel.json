@@ -20,13 +20,19 @@
     },
     {
       "src": "/(.*)",
-      "dest": "public/$1",
-      "use": "@vercel/static"
+      "dest": "public/$1"
     },
     {
       "src": "/uploads/(.*)",
       "headers": { "Cache-Control": "public, max-age=31536000, immutable" },
       "dest": "/uploads/$1"
     }
-  ]
+  ],
+  "env": {
+    "MONGO_DB": "mongodb+srv://mikhael:jambi1234@e-commerce.u4ozrkt.mongodb.net/rio_bangunan?retryWrites=true&w=majority&appName=e-commerce",
+    "JWT_SECRET": "1213abcd20203434",
+    "NODE_ENV": "development",
+    "MIDTRANS_SERVER_KEY": "SB-Mid-server-z1eeDuqgY1E5OwHlbMcgzw3d",
+    "MIDTRANS_URL": "https://app.sandbox.midtrans.com/snap/v1/transactions"
+  }
 }
