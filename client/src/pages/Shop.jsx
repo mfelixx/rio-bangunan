@@ -54,10 +54,6 @@ const Shop = () => {
       : checked.filter((item) => item !== id);
     dispatch(setChecked(updateChecked));
   };
-
-  console.log(checked);
-  //   Add all brands option to uniqueBrands
-
   const uniqueBrands = [
     ...Array.from(
       new Set(

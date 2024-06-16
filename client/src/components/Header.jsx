@@ -11,7 +11,6 @@ import { FaInstagram, FaFacebookSquare } from "react-icons/fa";
 
 const Header = () => {
   const { data, isLoading, isError } = useAllProductsQuery();
-  console.log(data);
 
   if (isLoading) return <div className="loader"></div>;
   if (isError) return <div>Something went wrong</div>;
