@@ -58,7 +58,10 @@ const createOrder = async (req, res) => {
       return {
         ...itemFromClient,
         product: itemFromClient._id,
-        price: matchingItemFromDB.price * 0.01 + matchingItemFromDB.price,
+        price: (
+          matchingItemFromDB.price * 0.01 +
+          matchingItemFromDB.price
+        ).toFixed(0),
         _id: undefined,
       };
     });
