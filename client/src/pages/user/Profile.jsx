@@ -103,12 +103,14 @@ const Profile = () => {
                 {isLoading ? <div className="loader"></div> : "Update"}
               </button>
 
-              <Link
-                to="/user-orders"
-                className="rounded cursor-pointer font-semibold py-2 px-4 my-[1rem] text-blue-500 hover:underline"
-              >
-                My Orders
-              </Link>
+              {userInfo.isAdmin === false && (
+                <Link
+                  to="/user-orders"
+                  className="rounded cursor-pointer font-semibold py-2 px-4 my-[1rem] text-blue-500 hover:underline"
+                >
+                  My Orders
+                </Link>
+              )}
             </div>
           </form>
         </div>

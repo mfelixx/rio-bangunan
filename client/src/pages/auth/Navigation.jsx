@@ -18,19 +18,19 @@ const Navigation = () => {
   const { userInfo } = useSelector((state) => state.auth);
   const { cartItems } = useSelector((state) => state.cart);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [showSidebar, setShowSidebar] = useState(false);
+  const [showSidebar] = useState(false);
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
-  const toggleSidebar = () => {
-    setShowSidebar(!showSidebar);
-  };
+  // const toggleSidebar = () => {
+  //   setShowSidebar(!showSidebar);
+  // };
 
-  const closeSidebar = () => {
-    setShowSidebar(false);
-  };
+  // const closeSidebar = () => {
+  //   setShowSidebar(false);
+  // };
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -148,7 +148,7 @@ const Navigation = () => {
                 </li>
                 <li>
                   <Link
-                    to="/admin/order"
+                    to="/admin/orderlist"
                     className="block px-2 py-1 hover:bg-gray-200"
                   >
                     Order

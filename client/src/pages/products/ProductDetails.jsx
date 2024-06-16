@@ -140,7 +140,8 @@ const ProductDetails = () => {
                   </h1>
                   <h1 className="flex items-center mb-6 w-[10rem]">
                     <FaBox className="mr-2" />
-                    Stock: {"\t"} {products.countInStock}
+                    Stock: {"\t"}{" "}
+                    {products.countInStock > 0 ? products.countInStock : 0}
                   </h1>
                 </div>
               </div>
@@ -151,34 +152,36 @@ const ProductDetails = () => {
                   text={`${products.numReviews} reviews`}
                 />
 
-                <div className="w-[6rem] rounded-lg text-block p-2">
-                  <button onClick={() => setQty(qty > 0 ? qty - 1 : 0)}>
-                    {
-                      <FaMinus className="border rounded-full bg-black text-white p-0.25" />
-                    }
-                  </button>
-                  <span className="mx-2">{qty}</span>
-                  <button
-                    onClick={() =>
-                      setQty(
-                        qty >= products.countInStock
-                          ? products.countInStock
-                          : qty + 1
-                      )
-                    }
-                  >
-                    {
-                      <FaPlus className="border rounded-full bg-black text-white p-0.25" />
-                    }
-                  </button>
-                </div>
+                {products.countInStock === 0 ? null : (
+                  <div className="w-[6rem] rounded-lg text-block p-2">
+                    <button onClick={() => setQty(qty > 0 ? qty - 1 : 0)}>
+                      {
+                        <FaMinus className="border rounded-full bg-black text-white p-0.25" />
+                      }
+                    </button>
+                    <span className="mx-2">{qty}</span>
+                    <button
+                      onClick={() =>
+                        setQty(
+                          qty >= products.countInStock
+                            ? products.countInStock
+                            : qty + 1
+                        )
+                      }
+                    >
+                      {
+                        <FaPlus className="border rounded-full bg-black text-white p-0.25" />
+                      }
+                    </button>
+                  </div>
+                )}
               </div>
               <div className="btn-container mt-4">
                 <button
                   onClick={addToCartHandler}
                   className="bg-blue-500 text-white py-2 px-4 rounded-lg"
                   // eslint-disable-next-line react/no-unknown-property
-                  disabled={products.countInStock === 0 && true}
+                  disabled={products.countInStock <= 0 && true}
                 >
                   Add To Cart
                 </button>

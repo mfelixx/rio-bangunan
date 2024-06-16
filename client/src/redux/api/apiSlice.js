@@ -5,6 +5,7 @@ import {
   CATEGORY_URL,
   PRODUCT_URL,
   UPLOAD_URL,
+  ORDERS_URL,
 } from "../constants";
 
 const baseQuery = fetchBaseQuery({ baseUrl: BASE_URL });
@@ -179,6 +180,65 @@ export const apiSlice = createApi({
         body: { checked, radio },
       }),
     }),
+
+    // order
+    createOrder: builder.mutation({
+      query: (data) => ({
+        url: ORDERS_URL,
+        method: "POST",
+        body: data,
+      }),
+    }),
+    getAllOrders: builder.query({
+      query: () => ({
+        url: ORDERS_URL,
+        method: "GET",
+      }),
+    }),
+    getOrderDetails: builder.query({
+      query: (orderId) => ({
+        url: `${ORDERS_URL}/${orderId}`,
+      }),
+    }),
+    payOrder: builder.mutation({
+      query: (orderId) => ({
+        url: `${ORDERS_URL}/${orderId}/pay`,
+        method: "POST",
+      }),
+    }),
+    getMyOrders: builder.query({
+      query: () => ({
+        url: `${ORDERS_URL}/mine`,
+      }),
+      keepUnusedDataFor: 5,
+    }),
+    deliverOrder: builder.mutation({
+      query: (id) => ({
+        url: `${ORDERS_URL}/${id}/deliver`,
+        method: "PUT",
+      }),
+    }),
+    getTotalOrders: builder.query({
+      query: () => ({
+        url: `${ORDERS_URL}/total-orders`,
+      }),
+    }),
+    getTotalSales: builder.query({
+      query: () => ({
+        url: `${ORDERS_URL}/total-sales`,
+      }),
+    }),
+    getTotalSalesByDate: builder.query({
+      query: () => ({
+        url: `${ORDERS_URL}/total-sales-by-date`,
+      }),
+    }),
+    confirmPayment: builder.mutation({
+      query: (orderId) => ({
+        url: `${ORDERS_URL}/${orderId}/confirm-payment`,
+        method: "PUT",
+      }),
+    }),
   }),
 });
 
@@ -207,4 +267,15 @@ export const {
   useGetTopProductsQuery,
   useGetNewProductsQuery,
   useGetFilteredProductsQuery,
+  // order
+  useCreateOrderMutation,
+  useGetAllOrdersQuery,
+  useGetOrderDetailsQuery,
+  usePayOrderMutation,
+  useGetMyOrdersQuery,
+  useDeliverOrderMutation,
+  useGetTotalOrdersQuery,
+  useGetTotalSalesQuery,
+  useGetTotalSalesByDateQuery,
+  useConfirmPaymentMutation,
 } = apiSlice;
