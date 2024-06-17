@@ -26,7 +26,7 @@ app.use("/api/upload", uploadRoutes);
 app.use("/api/orders", orderRoutes);
 
 const __dirname = path.resolve();
-app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 app.use(express.static(path.join(__dirname, "/public/dist")));
 app.use("*", (req, res) => {
   res.sendFile(path.join(__dirname, "/public/dist/index.html"));
