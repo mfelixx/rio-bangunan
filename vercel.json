@@ -19,8 +19,8 @@
       "dest": "/server/index.js"
     },
     {
-      "src": "/upload",
-      "dest": "/server/index.js"
+      "src": "/upload/(.*)",
+      "dest": "/uploads/$1"
     },
     {
       "src": "/(.*)",
@@ -28,7 +28,7 @@
     },
     {
       "src": "/uploads/(.*)",
-      "dest": "/uploads"
+      "dest": "/uploads/$1"
     }
   ],
   "env": {
