@@ -19,12 +19,13 @@
       "dest": "/server/index.js"
     },
     {
-      "src": "/api/upload(.*)",
-      "dest": "/server/routes/uploadRoutes.js"
-    },
-    {
       "src": "/(.*)",
       "dest": "public/$1"
+    },
+    {
+      "src": "/uploads/(.*)",
+      "headers": { "Cache-Control": "public, max-age=31536000, immutable" },
+      "dest": "/uploads/$1"
     }
   ],
   "env": {
