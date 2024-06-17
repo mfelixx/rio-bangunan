@@ -19,8 +19,8 @@
       "dest": "/server/index.js"
     },
     {
-      "src": "/upload/(.*)",
-      "dest": "/uploads/$1"
+      "src": "/api/upload(.*)",
+      "dest": "/server/routes/uploadRoutes.js"
     },
     {
       "src": "/(.*)",
